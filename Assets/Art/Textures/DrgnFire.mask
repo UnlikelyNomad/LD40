@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: DrgnFire
+  m_Mask: 01000000010000000000000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Master
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Arm_upper_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Arm_upper_L/Arm_lower_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Arm_upper_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Arm_upper_R/Arm_lower_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Chest
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Chest/Neck
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Chest/Neck/Head
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Chest/Neck/Head/Jaw_control
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Chest/Neck/Head/Jaw_control/Jaw
+    m_Weight: 1
+  - m_Path: Armature/Master/Abdomen/Thigh_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Thigh_L/Shin_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Thigh_L/Shin_L/Foot_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Thigh_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Thigh_R/Shin_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Thigh_R/Shin_R/Foot_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Wing_L
+    m_Weight: 0
+  - m_Path: Armature/Master/Abdomen/Wing_R
+    m_Weight: 0
+  - m_Path: Armature/Master/Tail_big
+    m_Weight: 0
+  - m_Path: Armature/Master/Tail_big/Tail_med
+    m_Weight: 0
+  - m_Path: Armature/Master/Tail_big/Tail_med/Tail_small
+    m_Weight: 0
+  - m_Path: Armature/Master/Tail_big/Tail_med/Tail_small/Tail_tip
+    m_Weight: 0
+  - m_Path: Cube
+    m_Weight: 0
+  - m_Path: Cube_001
+    m_Weight: 0

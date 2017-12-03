@@ -51,9 +51,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Archer.cs" />
+     <Compile Include="Assets\Scripts\Arrow.cs" />
+     <Compile Include="Assets\Scripts\Building.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\DestroyOnCollide.cs" />
-     <Compile Include="Assets\Scripts\FlyerController.cs" />
+     <Compile Include="Assets\Scripts\FaceVelocity.cs" />
+     <Compile Include="Assets\Scripts\Fireball.cs" />
+     <Compile Include="Assets\Scripts\Flicker.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Health.cs" />
+     <Compile Include="Assets\Scripts\LairController.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\ReplaceWithRubble.cs" />
+     <Compile Include="Assets\Scripts\Treasure.cs" />
+     <Compile Include="Assets\Scripts\VillageGeneration.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

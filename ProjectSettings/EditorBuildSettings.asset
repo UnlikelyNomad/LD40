@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Raid.unity
+    guid: 2c746fc716256434888f129894b80c80
+  - enabled: 1
+    path: Assets/_Lair.unity
+    guid: 56903b5840e7c9b45af1eaa01a2f7ca0
