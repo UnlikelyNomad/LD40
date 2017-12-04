@@ -22,6 +22,8 @@ public class Gerblin : MonoBehaviour {
 
     Vector2 vel;
 
+    VillageGeneration village;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
 
@@ -39,6 +41,11 @@ public class Gerblin : MonoBehaviour {
         }
 
         vel = new Vector2(v, 0);
+        Vector3 pos = transform.position;
+        pos.z = -6.4f;
+        transform.position = pos;
+
+        village = GameController.Instance.village;
     }
 
     void Update() {
@@ -53,6 +60,11 @@ public class Gerblin : MonoBehaviour {
     void FixedUpdate() {
         if (!coin) {
             rb.velocity = vel;
+            if (transform.position.x < (GameController.Instance.villageLimit * -2f) ||
+                transform.position.x > (village.villageSize + (GameController.Instance.villageLimit * 2f))) {
+                GameController.Instance.gerblins++;
+                Destroy(gameObject);
+            }
         } else if (leaving) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             Vector3 pos = transform.position;

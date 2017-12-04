@@ -14,6 +14,7 @@ TagManager:
   - TotalAmount
   - FinalGold
   - DeathPanel
+  - GoblinsAvailable
   layers:
   - Default
   - TransparentFX

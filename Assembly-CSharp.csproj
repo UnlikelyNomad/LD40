@@ -64,15 +64,22 @@
      <Compile Include="Assets\Scripts\Flicker.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Gerblin.cs" />
+     <Compile Include="Assets\Scripts\HelpPanel.cs" />
      <Compile Include="Assets\Scripts\LairController.cs" />
      <Compile Include="Assets\Scripts\LevelPanel.cs" />
      <Compile Include="Assets\Scripts\Meter.cs" />
      <Compile Include="Assets\Scripts\Peasant.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\ReplaceWithRubble.cs" />
+     <Compile Include="Assets\Scripts\Title\ArcherRun.cs" />
+     <Compile Include="Assets\Scripts\Title\GerblinRun.cs" />
+     <Compile Include="Assets\Scripts\Title\PeasantRun.cs" />
+     <Compile Include="Assets\Scripts\Title\TitleRunner.cs" />
+     <Compile Include="Assets\Scripts\TitleAntics.cs" />
      <Compile Include="Assets\Scripts\TitleController.cs" />
      <Compile Include="Assets\Scripts\Treasure.cs" />
      <Compile Include="Assets\Scripts\VillageGeneration.cs" />
+     <None Include="Assets\OFL.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

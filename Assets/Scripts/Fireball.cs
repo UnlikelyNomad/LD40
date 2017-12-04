@@ -25,6 +25,8 @@ public class Fireball : MonoBehaviour {
 
         if (bldg != null) {
             bldg.takeDamage(damage);
+        } else {
+            //spawn ground fire effect / check for villagers
         }
 
         Destroy(gameObject);

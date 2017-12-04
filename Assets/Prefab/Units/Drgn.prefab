@@ -800,7 +800,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600830010622770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 12.1, z: 0}
+  m_LocalPosition: {x: -15, y: 13.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4238295703392580}
@@ -1003,17 +1003,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flapImpulse: 300
   directionFactor: 80
-  mouseTurn: 1
   fireCooldown: 1
   fireDelay: 0.25
   speedLimit: 15
   groundLimit: 1.5
   heightFactor: 4
-  villageLimit: 25
   forceDecay: 0.9
   fireTime: 0
   landedAngle: 90
-  landingTurnSpeed: 3
+  landingTurnSpeed: 6
   eatObject: {fileID: 1313745704651528}
   projectile: {fileID: 1763253099541992, guid: a309cbb571ef0de40a0a40985eaa6d59, type: 2}
   fireVelocity: {x: 4, y: -0.2}
@@ -1021,7 +1019,11 @@ MonoBehaviour:
   projectileParent: {fileID: 0}
   anim: {fileID: 95734826530554262}
   eatDelay: 0.3
-  leavingText: {fileID: 0}
+  heartMeter: {fileID: 0}
+  staminaMeter: {fileID: 0}
+  goldMeter: {fileID: 0}
+  upEncumbrence: 4
+  sideEncumbrence: 2
 --- !u!114 &114528415456013126
 MonoBehaviour:
   m_ObjectHideFlags: 1

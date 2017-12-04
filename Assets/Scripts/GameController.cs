@@ -25,9 +25,9 @@ public class GameController : MonoBehaviour {
     Meter goldMeter;
 
     public float staminaDecayRate;
-    float currentStaminaDecay;
+    public float currentStaminaDecay;
     public float staminaDamageRate;
-    float currentDamageTimer;
+    public float currentDamageTimer;
 
     GameObject levelPanel;
     GameObject deathPanel;
@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour {
     Text totalGoldText;
     Text gerblinCount;
     Text finalGold;
+    Text gerblinsAvailable;
 
     GameObject leavingText;
 
@@ -127,6 +128,7 @@ public class GameController : MonoBehaviour {
         gerblinCount = GameObject.FindGameObjectWithTag("GerblinCount").GetComponent<Text>();
         finalGold = GameObject.FindGameObjectWithTag("FinalGold").GetComponent<Text>();
         leavingText = GameObject.FindGameObjectWithTag("LeavingText");
+        gerblinsAvailable = GameObject.FindGameObjectWithTag("GoblinsAvailable").GetComponent<Text>();
 
         levelPanel.SetActive(false);
         deathPanel.SetActive(false);
@@ -192,10 +194,12 @@ public class GameController : MonoBehaviour {
             return;
         }
 
+        gerblinsAvailable.text = "" + gerblins;
+
         if (ready) {
             int goldPips = goldMeter.getValue();
 
-            if (goldPips > 0) {
+            if (goldPips > 0 && staminaMeter.getValue() > 0) {
                 float decay = Time.deltaTime / (11 - goldPips);
                 currentStaminaDecay -= decay;
 

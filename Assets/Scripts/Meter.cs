@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Meter : MonoBehaviour {
 
     public int startValue;
-    int value;
+    public int value;
 
     Color frameColor;
     Color pipColor;

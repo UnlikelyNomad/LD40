@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour {
     public float eatDelay;
     float eatDelayTimer;
 
+    public Meter heartMeter;
+    public Meter staminaMeter;
+    public Meter goldMeter;
+
     int flapHash;
     int idleHash;
     int fireHash;
@@ -54,6 +58,9 @@ public class PlayerController : MonoBehaviour {
     int landedHash;
 
     Rigidbody2D rb;
+
+    public float upEncumbrence;
+    public float sideEncumbrence;
 
 	// Use this for initialization
 	void Start () {
@@ -71,12 +78,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-
-            //TODO: Move to GameController
-            Application.Quit();
-        }
 
         bool grounded = transform.position.y < groundLimit;
         anim.SetBool(groundHash, grounded);
@@ -117,25 +118,25 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButton("FlapLeft")) {
                 anim.SetTrigger(flapHash);
                 doFlap();
-                sideForce = -1 * directionFactor;
+                float encumbrence = goldMeter.getValue() * sideEncumbrence;
+                sideForce = -1 * (directionFactor - encumbrence);
             } else if (Input.GetButton("FlapRight")) {
                 anim.SetTrigger(flapHash);
                 doFlap();
-                sideForce = directionFactor;
+                float encumbrence = goldMeter.getValue() * sideEncumbrence;
+                sideForce = directionFactor - encumbrence;
             }
         }
 
         if (fireTime <= 0) {
             fire = false;
-            if (Input.GetButton("Fire")) {
-                if (grounded) {
-                    if (info.fullPathHash != chompingHash) {
-                        anim.SetTrigger(chompHash);
-                        eatDelayTimer = eatDelay;
-                    }
-                } else {
-                    anim.SetTrigger(fireHash);
-                    fireTime = fireCooldown;
+            if (!grounded && Input.GetButton("Fire")) {
+                anim.SetTrigger(fireHash);
+                fireTime = fireCooldown;
+            } else if (grounded && Input.GetButtonDown("Eat")) {
+                if (info.fullPathHash != chompingHash) {
+                    anim.SetTrigger(chompHash);
+                    eatDelayTimer = eatDelay;
                 }
             }
         } else {
@@ -154,13 +155,18 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void doFlap() {
-        float f = flapImpulse - (heightFactor * transform.position.y);
+        float encumbrence = goldMeter.getValue() * upEncumbrence;
+        float f = flapImpulse - (heightFactor * transform.position.y) - encumbrence;
         if (f > flapForce) flapForce = f;
     }
 
     void FixedUpdate() {
         if (flapForce > 0.01) {
-            rb.AddForce(new Vector2(sideForce, flapForce));
+
+            Vector2 f = new Vector2(sideForce, flapForce);
+
+            rb.AddForce(f);
+
             flapForce *= forceDecay;
             sideForce *= forceDecay;
         }
