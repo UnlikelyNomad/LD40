@@ -16,14 +16,27 @@ public class VillageGeneration : MonoBehaviour {
     }
 
     public float startSizeToArchers;
+    public float step = 15f;
 
     public Transform villageParent;
     public Transform backdropParent;
 
-    public VillageAsset[] assets;
+    public GameObject keepPrefab;
+    public GameObject gatePrefab;
+    public GameObject hutPrefab;
 
-    public VillageAsset[] backdropAssets;
-    public float[] backdropLayers;
+    public GameObject mountainPrefab;
+
+    public float mountainSpacing;
+
+    public GameObject roadPrefab;
+    public float roadSpacing;
+
+    public GameObject farmPrefab;
+    public float farmDepth;
+    public float farmSpacing;
+
+    public GameObject[] backdropPrefabs;
 
     public GameObject[] clouds;
     public float[] heights;
@@ -33,6 +46,9 @@ public class VillageGeneration : MonoBehaviour {
 
     public float villageSize;
 
+    public float keepFactor;
+    public float gateFactor;
+
 	// Use this for initialization
     public void SpawnVillage (float size) {
 
@@ -40,69 +56,74 @@ public class VillageGeneration : MonoBehaviour {
 
         Vector3 pos = Vector3.zero;
 
-        for (float x = 0; x < villageSize;) {
+        int numKeeps = (int)(size * keepFactor);
+        int numGates = (int)(size * gateFactor);
 
-            float totalChance = 0f;
-            for (int i = 0; i < assets.Length; ++i) {
-                totalChance += assets[i].chance;
-            }
+        float gateStep = 0;
 
-            float c = Random.Range(0f, totalChance);
+        int firstHalfKeeps = numKeeps / 2;
+        int secondHalfKeeps = numKeeps - firstHalfKeeps;
 
-            bool placed = false;
-            for (int i = 0; i < assets.Length; ++i) {
-                if (c > assets[i].chance) {
-                    c -= assets[i].chance;
-                    continue;
+        float nextGate = 0;
+
+        for (float x = villageSize / 2f; x > -1; x -= step) {
+            pos = new Vector3(x, 0, 0);
+
+            if (firstHalfKeeps > 0) {
+                //place a keep
+                firstHalfKeeps--;
+                Instantiate(keepPrefab, pos, Quaternion.identity, villageParent);
+
+                if (firstHalfKeeps == 0) {
+                    gateStep = x / (numGates + 1);
+                    nextGate = x - gateStep;
                 }
-
-                placed = true;
-                pos.x = x + assets[i].spacing / 2f;
-
-                x += assets[i].spacing;
-
-                Instantiate(assets[i].prefab, pos, Quaternion.identity, villageParent);
-                break;
+                continue;
             }
 
-            if (!placed) {
-                x += 10f;
+            if (x <= nextGate) {
+                nextGate -= gateStep;
+                Instantiate(gatePrefab, pos, Quaternion.identity, villageParent);
+                continue;
             }
+
+            Instantiate(hutPrefab, pos, Quaternion.identity, villageParent);
         }
 
-        for (float x = 0; x < villageSize;) {
+        for (float x = villageSize / 2f + step; x <= villageSize + 1; x += step) {
+            pos = new Vector3(x, 0, 0);
 
-            float totalChance = 0f;
-            for (int i = 0; i < backdropAssets.Length; ++i) {
-                totalChance += backdropAssets[i].chance;
-            }
+            if (secondHalfKeeps > 0) {
+                secondHalfKeeps--;
+                Instantiate(keepPrefab, pos, Quaternion.identity, villageParent);
 
-            float c = Random.Range(0f, totalChance);
-
-            bool placed = false;
-            for (int i = 0; i < backdropAssets.Length; ++i) {
-                if (c > backdropAssets[i].chance) {
-                    c -= backdropAssets[i].chance;
-                    continue;
+                if (secondHalfKeeps == 0) {
+                    gateStep = (villageSize - x) / (numGates + 1);
+                    nextGate = x + gateStep;
                 }
-
-                placed = true;
-                pos.x = x + backdropAssets[i].spacing / 2f;
-
-                pos.z = backdropLayers[Random.Range(0, backdropLayers.Length)];
-
-                x += backdropAssets[i].spacing;
-
-                GameObject g = (GameObject)Instantiate(backdropAssets[i].prefab, pos, Quaternion.identity, backdropParent);
-                g.layer = 9;
-                break;
+                continue;
             }
 
-            if (!placed) {
-                x += 10f;
+            if ( x >= nextGate) {
+                nextGate += gateStep;
+                Instantiate(gatePrefab, pos, Quaternion.identity, villageParent);
+                continue;
             }
+
+            Instantiate(hutPrefab, pos, Quaternion.identity, villageParent);
         }
 
+        //backdrops
+        for (float x = 0; x < villageSize; x += 10f) {
+
+            GameObject item = backdropPrefabs[Random.Range(0, backdropPrefabs.Length)];
+            float z = Random.Range(30, 300);
+            float a = Random.Range(0, 360);
+
+            Instantiate(item, new Vector3(x, 0, z), Quaternion.Euler(0, a, 0), villageParent);
+        }
+
+        //clouds
         for (float x = 0; x < villageSize; x += 20f) {
             pos = new Vector3();
             pos.x = x;
@@ -113,13 +134,37 @@ public class VillageGeneration : MonoBehaviour {
             Instantiate(clouds[Random.Range(0, clouds.Length)], pos, r, backdropParent);
         }
 
+        //starting archers
         int numArchers = (int)(villageSize * startSizeToArchers);
         float startX = villageSize / 2;
         startX -= (numArchers / 2) * 10;
         for (int i = 0; i < numArchers; ++i) {
             float x = startX + (i * 10f);
 
-            Instantiate(archerPrefab, new Vector3(x, 0, 0), Quaternion.identity);
+            GameObject g = (GameObject)Instantiate(archerPrefab, new Vector3(x, 0, 0), Quaternion.identity);
+            Archer a = g.GetComponent<Archer>();
+            a.ready = true;
         }
+
+        //mountains
+        float mountainX = 0f;
+        while (mountainX < (villageSize + mountainSpacing / 2f)) {
+            Instantiate(mountainPrefab, new Vector3(mountainX, 0, 0), Quaternion.identity, villageParent);
+            mountainX += mountainSpacing;
+        }
+
+        //roads
+        float roadX = -50f;
+        while (roadX + roadSpacing < villageSize + 50f) {
+            Instantiate(roadPrefab, new Vector3(roadX, 0, 0), Quaternion.identity, villageParent);
+            roadX += roadSpacing;
+        }
+
+        //farms
+        /*float farmX = 0;
+        while (farmX < villageSize) {
+            Instantiate(farmPrefab, new Vector3(farmX, 0, farmDepth), Quaternion.identity, villageParent);
+            farmX += farmSpacing;
+        }*/
 	}
 }

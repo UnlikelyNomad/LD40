@@ -6,13 +6,11 @@ public class Arrow : MonoBehaviour {
 
     public float damage = 1f;
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnTriggerEnter2D(Collider2D col) {
         GameObject other = col.gameObject;
 
-        Health h = other.GetComponent<Health>();
-
-        if (h != null) {
-            h.takeDamage(damage);
+        if (other.tag.CompareTo("Player") == 0) {
+            GameController.Instance.damagePlayer();
         }
 
         Destroy(gameObject);

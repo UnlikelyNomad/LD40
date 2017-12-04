@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HeartMeter
+  - StaminaMeter
+  - GoldMeter
+  - LevelPanel
+  - LeavingText
+  - GerblinCount
+  - GoldAmount
+  - TotalAmount
+  - FinalGold
+  - DeathPanel
   layers:
   - Default
   - TransparentFX
@@ -20,9 +30,9 @@ TagManager:
   - Player
   - Arrow
   - Treasure
-  - 
-  - 
-  - 
+  - Peasant
+  - Mouth
+  - Gerblin
   - 
   - 
   - 

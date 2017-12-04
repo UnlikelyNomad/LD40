@@ -14,17 +14,10 @@ public class CameraFollow : MonoBehaviour {
     public float minHeight;
 
     public Vector3 offset;
-    public Vector3 targetStart;
-    public Vector3 cameraStart;
 
 	// Use this for initialization
 	void Start () {
         targetTransform = target.transform;
-
-        targetStart = targetTransform.position;
-        cameraStart = transform.position;
-
-        offset = cameraStart - targetStart;
 	}
 	
 	// Update is called once per frame

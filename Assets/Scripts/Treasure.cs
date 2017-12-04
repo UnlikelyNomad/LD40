@@ -18,15 +18,15 @@ public class Treasure : MonoBehaviour {
         transform.localScale = new Vector3(amount, amount, amount);
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    /*void OnCollisionEnter2D(Collision2D col) {
         GameController gc = GameController.Instance;
-        gc.collectGold(value);
+        gc.collectGold(value, col.gameObject.tag.CompareTo("Player") == 0);
         Destroy(gameObject);
-    }
+    }*/
 
     void OnTriggerEnter2D(Collider2D col) {
         GameController gc = GameController.Instance;
-        gc.collectGold(value);
+        gc.collectGold(value, col.gameObject.tag.CompareTo("Player") == 0);
         Destroy(gameObject);
     }
 }

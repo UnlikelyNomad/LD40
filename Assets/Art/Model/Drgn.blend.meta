@@ -66,6 +66,8 @@ ModelImporter:
     7400000: Default Take
     7400002: Flap
     7400004: Fireball
+    7400006: Chomp
+    7400008: Land
     9500000: //RootNode
     13700000: Cube
   externalObjects:

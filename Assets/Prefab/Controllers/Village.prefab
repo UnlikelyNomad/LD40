@@ -81,51 +81,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSizeToArchers: 0.02
+  step: 15
   villageParent: {fileID: 4291440618999030}
   backdropParent: {fileID: 4726558238318532}
-  assets:
-  - prefab: {fileID: 1444821261510312, guid: 3097e223b8714904bba3fcbe1663dd05, type: 2}
-    spacing: 10
-    chance: 0.7
-    outside: 1
-    inside: 1
-    wall: 0
-    keep: 0
-  - prefab: {fileID: 1900217955374426, guid: a49406b3f2207d44b8634d13a8bdd931, type: 2}
-    spacing: 20
-    chance: 0.3
-    outside: 0
-    inside: 0
-    wall: 1
-    keep: 0
-  - prefab: {fileID: 1702397657902662, guid: 161cf1f51d00b6341974a86285a2669a, type: 2}
-    spacing: 20
-    chance: 0.1
-    outside: 0
-    inside: 1
-    wall: 0
-    keep: 1
-  backdropAssets:
-  - prefab: {fileID: 1948554344863604, guid: f651b94cd1af39143b644332e50bcbb9, type: 2}
-    spacing: 20
-    chance: 0.7
-    outside: 0
-    inside: 0
-    wall: 0
-    keep: 0
-  - prefab: {fileID: 1444821261510312, guid: 3097e223b8714904bba3fcbe1663dd05, type: 2}
-    spacing: 20
-    chance: 0.2
-    outside: 0
-    inside: 0
-    wall: 0
-    keep: 0
-  backdropLayers:
-  - 40
-  - 60
-  - 80
-  - 100
-  - 120
+  keepPrefab: {fileID: 1702397657902662, guid: 161cf1f51d00b6341974a86285a2669a, type: 2}
+  gatePrefab: {fileID: 1900217955374426, guid: a49406b3f2207d44b8634d13a8bdd931, type: 2}
+  hutPrefab: {fileID: 1444821261510312, guid: 3097e223b8714904bba3fcbe1663dd05, type: 2}
+  mountainPrefab: {fileID: 1547378182451034, guid: 16f0690a1f220a6409c36ef87c03a7c6,
+    type: 2}
+  mountainSpacing: 800
+  roadPrefab: {fileID: 1058115970063340, guid: 2d4d0740d18339b409c1e6e4b9840feb, type: 2}
+  roadSpacing: 22
+  farmPrefab: {fileID: 1872119946593494, guid: c27ad24c09a17eb42bd47df6d998ffa9, type: 2}
+  farmDepth: 40
+  farmSpacing: 120
+  backdropPrefabs:
+  - {fileID: 1107900936646536, guid: d0813d86a5a92064395070f46cd2048e, type: 2}
+  - {fileID: 1769507370647386, guid: 0f23f4d8f5c2cf247a881832c59f11c3, type: 2}
+  - {fileID: 1713966981177506, guid: 6b5ee25539283994bacea7644bb86e2d, type: 2}
+  - {fileID: 1263786116217372, guid: f651b94cd1af39143b644332e50bcbb9, type: 2}
   clouds:
   - {fileID: 1474834481980802, guid: 09ba7a3168c976a43b4dddd029348968, type: 2}
   - {fileID: 1628248912175584, guid: ba4a5942bb0e45549af0187b6bef6381, type: 2}
@@ -140,3 +114,5 @@ MonoBehaviour:
   archerPrefab: {fileID: 1575780114506422, guid: e2048dc6f89efea4da6f8472d067b561,
     type: 2}
   villageSize: 1000
+  keepFactor: 0.015
+  gateFactor: 0.01

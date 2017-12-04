@@ -17,7 +17,6 @@ public class ReplaceWithRubble : MonoBehaviour {
         timeToReplace = destroyEffect.main.startLifetime.constant / 2f;
         destroyEffect.gameObject.SetActive(true);
         crumbling = true;
-        Debug.Log("crumbling");
     }
 	
 	// Update is called once per frame
@@ -26,7 +25,6 @@ public class ReplaceWithRubble : MonoBehaviour {
             timeToReplace -= Time.deltaTime;
 
             if (!replaced && timeToReplace <= 0) {
-                Debug.Log("replacing");
                 toHide.SetActive(false);
                 replaced = true;
                 Instantiate(rubblePrefab, transform.position, transform.rotation, transform.parent);

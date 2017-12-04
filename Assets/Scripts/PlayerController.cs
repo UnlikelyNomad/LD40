@@ -1,27 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     public float flapImpulse;
     public float directionFactor;
 
-    public bool mouseTurn = true;
-
     public float fireCooldown = 3f;
     public float fireDelay = 0.3f;
     public float speedLimit;
 
+    public float groundLimit = 1.5f;
+
     public float heightFactor = -1f;
 
-    public float villageLimit = 25f;
+    public float forceDecay;
 
     float flapForce;
     float sideForce;
 
     public float fireTime;
+
+    public float landedAngle = 30f;
+    public float landingTurnSpeed = 3f;
+
+    public GameObject eatObject;
 
     bool left;
 
@@ -38,15 +42,18 @@ public class PlayerController : MonoBehaviour {
 
     public Animator anim;
 
+    public float eatDelay;
+    float eatDelayTimer;
+
     int flapHash;
     int idleHash;
     int fireHash;
-
-    public GameObject leavingText;
+    int groundHash;
+    int chompHash;
+    int chompingHash;
+    int landedHash;
 
     Rigidbody2D rb;
-
-    VillageGeneration village;
 
 	// Use this for initialization
 	void Start () {
@@ -55,19 +62,48 @@ public class PlayerController : MonoBehaviour {
 
         flapHash = Animator.StringToHash("Flap");
         fireHash = Animator.StringToHash("Fire");
-        idleHash = Animator.StringToHash("Base Layer.Idle");
-        village = GameController.Instance.village;
+        groundHash = Animator.StringToHash("OnGround");
+        chompHash = Animator.StringToHash("Chomp");
+        chompingHash = Animator.StringToHash("Base Layer.Chomping");
+        idleHash = Animator.StringToHash("Base Layer.Gliding");
+        landedHash = Animator.StringToHash("Base Layer.Landed");
 	}
 	
 	// Update is called once per frame
     void Update () {
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
+
+            //TODO: Move to GameController
             Application.Quit();
         }
 
-        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        bool grounded = transform.position.y < groundLimit;
+        anim.SetBool(groundHash, grounded);
 
+        float rotateAngle = 0;
+        if (grounded) {
+            rotateAngle = landedAngle;
+
+            if (left) rotateAngle *= -1;
+        }
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, rotateAngle, 0), Time.deltaTime * landingTurnSpeed);
+
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        bool chomping = info.fullPathHash == chompingHash;
+
+        if (chomping) {
+            if (eatDelayTimer > 0) {
+                eatDelayTimer -= Time.deltaTime;
+                if (eatDelayTimer < 0) {
+                    eatObject.SetActive(true);
+                }
+            }
+        } else {
+            eatObject.SetActive(false);
+        }
+
+        //sets the facing
         float velX = rb.velocity.x;
         if (Mathf.Abs(velX) > 0.01f) {
             left = velX < 0f;
@@ -75,11 +111,12 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = scale;
         }
 
-        if (info.fullPathHash == idleHash) {
+
+        //get inputs if in glide state or landed
+        if (info.fullPathHash == idleHash || info.fullPathHash == landedHash) {
             if (Input.GetButton("FlapLeft")) {
                 anim.SetTrigger(flapHash);
                 doFlap();
-                //flapForce = flapImpulse;
                 sideForce = -1 * directionFactor;
             } else if (Input.GetButton("FlapRight")) {
                 anim.SetTrigger(flapHash);
@@ -91,9 +128,15 @@ public class PlayerController : MonoBehaviour {
         if (fireTime <= 0) {
             fire = false;
             if (Input.GetButton("Fire")) {
-                anim.SetTrigger(fireHash);
-                fireTime = fireCooldown;
-
+                if (grounded) {
+                    if (info.fullPathHash != chompingHash) {
+                        anim.SetTrigger(chompHash);
+                        eatDelayTimer = eatDelay;
+                    }
+                } else {
+                    anim.SetTrigger(fireHash);
+                    fireTime = fireCooldown;
+                }
             }
         } else {
             fireTime -= Time.deltaTime;
@@ -104,21 +147,9 @@ public class PlayerController : MonoBehaviour {
                 float vel = fireVelocity.x;
                 if (left) vel *= -1;
 
-                Vector2 pV = new Vector2(vel, fireVelocity.y) + rb.velocity;
+                Vector2 pV = new Vector2(vel + rb.velocity.x, fireVelocity.y);
                 p.GetComponent<Rigidbody2D>().velocity = pV;
             }
-        }
-
-        float x = transform.position.x;
-
-        if (x < -villageLimit || x > village.villageSize + villageLimit) {
-            leavingText.SetActive(true);
-        } else {
-            leavingText.SetActive(false);
-        }
-
-        if (x < (villageLimit * -2f) || x > village.villageSize + (villageLimit * 2f)) {
-            GameController.Instance.LeaveRaid();
         }
 	}
 
@@ -130,31 +161,8 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         if (flapForce > 0.01) {
             rb.AddForce(new Vector2(sideForce, flapForce));
-            flapForce *= 0.5f;
-            sideForce *= 0.5f;
+            flapForce *= forceDecay;
+            sideForce *= forceDecay;
         }
-
-        Vector2 vel = rb.velocity;
-
-        if (vel.x > speedLimit) {
-            vel.x = speedLimit;
-        } else if (vel.x < -speedLimit) {
-            vel.x = -speedLimit;
-        }
-
-        if (vel.y > speedLimit) {
-            vel.y = speedLimit;
-        } else if (vel.y < -speedLimit) {
-            vel.y = -speedLimit;
-        }
-
-        /*if (transform.position.y > maxHeight) {
-            Vector3 pos = transform.position;
-            pos.y = maxHeight;
-            transform.position = pos;
-            vel.y = 0.1f;
-        }*/
-
-        rb.velocity = vel;
     }
 }

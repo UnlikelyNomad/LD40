@@ -608,7 +608,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575780114506422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.61, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4893775195851492}
@@ -864,17 +864,19 @@ MonoBehaviour:
   runSpeed: 4.5
   run: 0
   shoot: 0
-  playerDistRun: 5
+  playerDistRun: 10
   playerMaxDist: 200
   shootChance: 0.01
   speedFactor: 0.3
+  zDepth: 0
   left: 0
   anim: {fileID: 95456966929157734}
   arrowEffector: {fileID: 4548989165940678}
-  arrowVelocity: 20
+  arrowVelocity: 25
   arrowDelay: 0.05
   arrowPrefab: {fileID: 1547644707758888, guid: 3cf8ccb12f949fd4aa17c20846b27287,
     type: 2}
+  ready: 0
 --- !u!137 &137766605151479576
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

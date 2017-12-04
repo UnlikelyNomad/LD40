@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 61083367381034380}
   - component: {fileID: 114364836501022894}
   - component: {fileID: 114347875840353076}
+  - component: {fileID: 114541360196962044}
   m_Layer: 8
   m_Name: Hut
   m_TagString: Untagged
@@ -114,6 +115,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1878316691695246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4985907004054508}
+  m_Layer: 8
+  m_Name: Peasant Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4181867701448918
 Transform:
   m_ObjectHideFlags: 1
@@ -134,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444821261510312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -40.76, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4234086923768816}
@@ -142,6 +158,7 @@ Transform:
   - {fileID: 4897391760782998}
   - {fileID: 4181867701448918}
   - {fileID: 4599043620600222}
+  - {fileID: 4985907004054508}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,6 +213,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4197628342011272}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4985907004054508
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878316691695246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.61, y: 0, z: 0.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4197628342011272}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23662160451706418
 MeshRenderer:
@@ -333,6 +363,20 @@ MonoBehaviour:
   onFire: 0
   coinPrefab: {fileID: 1025973845656266, guid: 7afb75ed77fc03945bae5777b8bcf328, type: 2}
   coinValue: 1
+--- !u!114 &114541360196962044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444821261510312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f142179d00d3b6c4fab2772e72aa826c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1992818964633096, guid: 94f941ed9d9279944b26d8182fe947dd, type: 2}
+  spawn: {fileID: 4985907004054508}
+  spawnLimit: 1
 --- !u!114 &114882455989707658
 MonoBehaviour:
   m_ObjectHideFlags: 1

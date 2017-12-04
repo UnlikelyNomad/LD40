@@ -6,10 +6,35 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Grass
+    100004: Road
+    100006: Tree
+    100008: Tree_naked
+    100010: Tree_pine
     400000: //RootNode
+    400002: Grass
+    400004: Road
+    400006: Tree
+    400008: Tree_naked
+    400010: Tree_pine
     2300000: //RootNode
+    2300002: Grass
+    2300004: Road
+    2300006: Tree
+    2300008: Tree_naked
+    2300010: Tree_pine
     3300000: //RootNode
+    3300002: Grass
+    3300004: Road
+    3300006: Tree
+    3300008: Tree_naked
+    3300010: Tree_pine
     4300000: Cube
+    4300002: Road
+    4300004: Grass
+    4300006: Tree
+    4300008: Tree_naked
+    4300010: Tree_pine
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -18,6 +43,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Foliage
     second: {fileID: 2100000, guid: 1b44c864360e4194d98236c8eb6fcb93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road
+    second: {fileID: 2100000, guid: 8e155d7ec30c5fa4e88b5793d0ee1373, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks
+    second: {fileID: 2100000, guid: bb3306efdf903394ebc48d59ffbe338e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

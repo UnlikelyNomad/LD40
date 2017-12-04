@@ -15,7 +15,6 @@ public class Building : MonoBehaviour {
 
     float totalFireDamage;
 
-    public GameObject coinPrefab;
     public float coinValue;
 
     bool crumbling = false;
@@ -50,9 +49,7 @@ public class Building : MonoBehaviour {
                 crumbling = true;
             }
 
-            GameObject coin = (GameObject)Instantiate(coinPrefab, transform.position, Quaternion.identity);
-            Treasure c = coin.GetComponent<Treasure>();
-            c.setValue(coinValue);
+            GameController.Instance.SpawnCoin(coinValue, transform.position);
 
             return;
         }
