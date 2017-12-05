@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 58673937996972112}
   - component: {fileID: 58380757238846834}
   - component: {fileID: 58792897189327862}
+  - component: {fileID: 82978086824778180}
   m_Layer: 12
   m_Name: Drgn
   m_TagString: Player
@@ -973,6 +974,86 @@ CircleCollider2D:
   m_Offset: {x: 3.05, y: 1.57}
   serializedVersion: 2
   m_Radius: 1.43
+--- !u!82 &82978086824778180
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600830010622770}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95734826530554262
 Animator:
   serializedVersion: 3
@@ -1001,10 +1082,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f4caee33a3ff241ae02d164ca4cb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flapClip: {fileID: 8300000, guid: d56960005ebeb8a4cbf02d7d11c20d89, type: 3}
+  fireballClip: {fileID: 8300000, guid: 46d732fba3e70f14a8117ae1dbd625d5, type: 3}
+  chompClip: {fileID: 8300000, guid: bd4b63f73c891f24681eaec2435453ed, type: 3}
+  music: {fileID: 0}
+  musicLevelEnd: {fileID: 0}
+  musicDead: {fileID: 0}
+  flapClipMin: 0.1
+  flapClipMax: 0.2
   flapImpulse: 300
   directionFactor: 80
   fireCooldown: 1
-  fireDelay: 0.25
+  fireDelay: 0.3
   speedLimit: 15
   groundLimit: 1.5
   heightFactor: 4

@@ -21,9 +21,12 @@ public class Building : MonoBehaviour {
 
     ParticleSystem.EmissionModule em;
 
+    AudioSource src;
+
 	// Use this for initialization
 	void Start () {
         em = onFireEffect.emission;
+        src = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -55,6 +58,12 @@ public class Building : MonoBehaviour {
         }
 
         em.enabled = onFire;
+
+        if (onFire && !src.isPlaying) {
+            src.Play();
+        } else if (!onFire && src.isPlaying){
+            src.Pause();
+        }
 	}
 
     public void takeDamage(float amount) {

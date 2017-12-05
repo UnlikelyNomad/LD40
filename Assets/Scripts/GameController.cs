@@ -8,6 +8,12 @@ public class GameController : MonoBehaviour {
 
     static GameController _instance;
 
+    public AudioClip music;
+    public AudioClip levelEndMusic;
+    public AudioClip deadMusic;
+
+    public AudioClip coinClip;
+
     bool ready = false;
 
     public GameObject villagePrefab;
@@ -49,6 +55,14 @@ public class GameController : MonoBehaviour {
     public GameObject gerblinPrefab;
 
     GameObject player;
+
+    AudioSource src;
+
+    public Image damageOverlay;
+
+    public float damageOpacity;
+    public float damageLength;
+    float damageTimer;
 
     [HideInInspector]
     public VillageGeneration village;
@@ -129,6 +143,7 @@ public class GameController : MonoBehaviour {
         finalGold = GameObject.FindGameObjectWithTag("FinalGold").GetComponent<Text>();
         leavingText = GameObject.FindGameObjectWithTag("LeavingText");
         gerblinsAvailable = GameObject.FindGameObjectWithTag("GoblinsAvailable").GetComponent<Text>();
+        damageOverlay = GameObject.FindGameObjectWithTag("DamageOverlay").GetComponent<Image>();
 
         levelPanel.SetActive(false);
         deathPanel.SetActive(false);
@@ -154,9 +169,17 @@ public class GameController : MonoBehaviour {
 
         currentStaminaDecay = staminaDecayRate;
         ready = true;
+
+        src = GetComponent<AudioSource>();
+        src.clip = music;
+        src.Play();
+
     }
 
     public void collectGold(float amount, bool player) {
+
+        src.PlayOneShot(coinClip, 0.4f);
+
         gold += amount;
         goldCollected += amount;
 
@@ -170,16 +193,20 @@ public class GameController : MonoBehaviour {
         player.SetActive(false);
 
         updateLevelPanel();
+
+        src.clip = levelEndMusic;
+        src.Play();
     }
 
     void updateLevelPanel() {
-        currentGoldText.text = gold + "G";
-        totalGoldText.text = goldCollected + "G";
+        currentGoldText.text = gold + "g";
+        totalGoldText.text = goldCollected + "g";
         gerblinCount.text = "" + totalGerblins;
     }
 
     public void damagePlayer() {
         healthMeter.decrement();
+        damageTimer = damageLength;
     }
 
     public void Eat() {
@@ -222,7 +249,7 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-            if (healthMeter.getValue() == 0) {
+            if (player.activeInHierarchy && healthMeter.getValue() == 0) {
                 killPlayer();
             }
 
@@ -236,8 +263,29 @@ public class GameController : MonoBehaviour {
                 leavingText.SetActive(false);
             }
 
-            if (x < (villageLimit * -2f) || x > village.villageSize + (villageLimit * 2f)) {
-                LeaveRaid();
+            if (player.activeInHierarchy) {
+                if (x < (villageLimit * -2f) || x > village.villageSize + (villageLimit * 2f)) {
+                    LeaveRaid();
+                }
+                if (damageTimer > 0) {
+                    damageTimer -= Time.deltaTime;
+                }
+
+                float o = damageOpacity * (damageTimer / damageLength);
+                if (o < 0) o = 0;
+                Color c = damageOverlay.color;
+                c.a = o;
+                damageOverlay.color = c;
+            } else {
+                Color c = damageOverlay.color;
+
+                if (healthMeter.getValue() == 0) {
+                    c.a = damageOpacity;
+                } else {
+                    c.a = 0;
+                }
+
+                damageOverlay.color = c;
             }
         }
     }
@@ -245,12 +293,17 @@ public class GameController : MonoBehaviour {
     void killPlayer() {
         player.SetActive(false);
         deathPanel.SetActive(true);
-        finalGold.text = goldCollected + "G";
+        finalGold.text = goldCollected + "g";
+
+        src.clip = deadMusic;
+        src.Play();
     }
 
     public void Restart() {
         gold = 0;
         goldCollected = 0;
+        gerblins = 0;
+        totalGerblins = 0;
         SceneManager.LoadScene("_Raid");
     }
 }

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: de0d8bafa0bb0174b9a3a89aede9cdea
+timeCreated: 1512426110
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Seaweed Script
+  fontNames:
+  - Seaweed Script
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

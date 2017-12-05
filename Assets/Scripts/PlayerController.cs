@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    public AudioClip flapClip;
+    public AudioClip fireballClip;
+    public AudioClip chompClip;
+
+    public float flapClipMin = 0.4f;
+    public float flapClipMax = 0.8f;
+
     public float flapImpulse;
     public float directionFactor;
 
@@ -62,8 +69,12 @@ public class PlayerController : MonoBehaviour {
     public float upEncumbrence;
     public float sideEncumbrence;
 
+    AudioSource src;
+
 	// Use this for initialization
 	void Start () {
+        src = GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody2D>();
         scale = Vector3.one;
 
@@ -116,11 +127,13 @@ public class PlayerController : MonoBehaviour {
         //get inputs if in glide state or landed
         if (info.fullPathHash == idleHash || info.fullPathHash == landedHash) {
             if (Input.GetButton("FlapLeft")) {
+                src.PlayOneShot(flapClip, Random.Range(flapClipMin, flapClipMax));
                 anim.SetTrigger(flapHash);
                 doFlap();
                 float encumbrence = goldMeter.getValue() * sideEncumbrence;
                 sideForce = -1 * (directionFactor - encumbrence);
             } else if (Input.GetButton("FlapRight")) {
+                src.PlayOneShot(flapClip, Random.Range(flapClipMin, flapClipMax));
                 anim.SetTrigger(flapHash);
                 doFlap();
                 float encumbrence = goldMeter.getValue() * sideEncumbrence;
@@ -133,8 +146,10 @@ public class PlayerController : MonoBehaviour {
             if (!grounded && Input.GetButton("Fire")) {
                 anim.SetTrigger(fireHash);
                 fireTime = fireCooldown;
+                src.PlayOneShot(fireballClip, 0.4f);
             } else if (grounded && Input.GetButtonDown("Eat")) {
                 if (info.fullPathHash != chompingHash) {
+                    src.PlayOneShot(chompClip, 0.4f);
                     anim.SetTrigger(chompHash);
                     eatDelayTimer = eatDelay;
                 }
@@ -147,7 +162,6 @@ public class PlayerController : MonoBehaviour {
                 GameObject p = (GameObject)Instantiate(projectile, projectileEffector.position, Quaternion.identity, projectileParent);
                 float vel = fireVelocity.x;
                 if (left) vel *= -1;
-
                 Vector2 pV = new Vector2(vel + rb.velocity.x, fireVelocity.y);
                 p.GetComponent<Rigidbody2D>().velocity = pV;
             }

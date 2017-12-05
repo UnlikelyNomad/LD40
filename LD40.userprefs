@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Title\TitleRunner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameController.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameController.cs" Line="197" Column="48" />
-      <File FileName="Assets\Scripts\Meter.cs" Line="33" Column="5" />
-      <File FileName="Assets\Scripts\Fireball.cs" Line="37" Column="29" />
-      <File FileName="Assets\Scripts\TitleAntics.cs" Line="63" Column="19" />
-      <File FileName="Assets\Scripts\Title\TitleRunner.cs" Line="18" Column="14" />
-      <File FileName="Assets\Scripts\Title\ArcherRun.cs" Line="8" Column="12" />
-      <File FileName="Assets\Scripts\Title\GerblinRun.cs" Line="12" Column="1" />
-      <File FileName="Assets\Scripts\Title\PeasantRun.cs" Line="9" Column="3" />
+      <File FileName="Assets\Scripts\Meter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Fireball.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TitleAntics.cs" Line="58" Column="26" />
+      <File FileName="Assets\Scripts\Title\TitleRunner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Title\ArcherRun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Title\GerblinRun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Title\PeasantRun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="149" Column="53" />
+      <File FileName="Assets\Scripts\GameController.cs" Line="287" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
